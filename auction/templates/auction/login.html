@@ -1,0 +1,14 @@
+{% extends 'auction/base.html' %}
+{% block content %}
+     <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+            <input type="text" maxlength="50" class="form-control" placeholder="EMAIL" name="email">
+            <br>
+            <input type="password" maxlength="16"  class="form-control" placeholder="PASSWORD" name="password1">
+            <input class="btn btn-primary" type="submit" value="LOGIN">
+            <a href="{% url 'register' %}">Register!</a>
+            <br>
+        </div>
+    </form>
+{% endblock%}

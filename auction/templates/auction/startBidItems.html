@@ -1,0 +1,27 @@
+{% extends 'auction/base.html' %}
+{% block content %}
+     {% for item in items %}
+        <article class="media content-section">
+            <div class="media-body">
+                <div class = "article-metadata">
+                    <h5>Category => {{ item.category_name }}</h5>
+                </div>
+                <div class="article-metadata">
+                    <p class="mr-2">ITEM CODE => {{ item.item_id }}</p>
+                    <h4>Name of item => {{ item.item_name }}</h4>
+                </div>
+                <h6>{{ item.item_description }}</h6>
+                <div class="article-metadata">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input type="number" step="1" name="base_price">
+                        <br>
+                        <input type="hidden" value={{ item.item_id }} name="pk">
+                        <br>
+                        <input type="submit" class="btn-success" value="OPEN THIS ITEM FOR BIDDING">
+                    </form>
+                </div>
+            </div>
+        </article>
+    {% endfor %}
+{% endblock%}

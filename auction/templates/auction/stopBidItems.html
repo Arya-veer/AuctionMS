@@ -1,0 +1,51 @@
+{% extends 'auction/base.html' %}
+{% block content %}
+    <article class="card-style" >
+            <div class="media content-section" >
+                <div class="media-body">
+                    <div class="article-metadata">
+                        <p class="mr-2">ITEM CODE => {{ bid_item.item_code }}</p>
+                        <h4>Name of item => {{ bid_item.item_name }}</h4>
+
+                    </div>
+                    <h6>{{ bid_item.item_description }}</h6>
+                </div>
+            </div>
+        </article>
+    <br>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+            <input type="hidden" name="pk" value={{ bid_item.id }}>
+            <input class="btn btn-outline-info" type="submit" value="STOP BIDDING">
+        </div>
+    </form>
+     {% for bid in bids %}
+        <article class="media content-section">
+            <div class="media-body">
+                <div class = "article-metadata">
+                    <h5>Bid by {{ bid.name }}</h5>
+                    <br>
+                    <h6>{{ bid.bid_status }}</h6>
+                </div>
+                <div class="article-metadata">
+                    <p class="mr-2">BID AMOUNT => {{ bid.amount }}</p>
+                    <h4>BID AT {{ bid.time_of_bid }}</h4>
+                </div>
+                {% if bid.bid_status == "pending" %}
+                <div>
+                    <form method = "POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <select name = "status" class="form-select" aria-label="Default select example">
+                            <option value="approved">Approved</option>
+                            <option value="rejected">Rejected</option>
+                        </select>
+                        <input type="hidden" name="bid_id" value={{ bid.bid_id }}>
+                        <input class = "btn btn-outline-info" type="submit" value="SUBMIT">
+                    </form>
+                </div>
+                {% endif %}
+            </div>
+        </article>
+    {% endfor %}
+{% endblock%}

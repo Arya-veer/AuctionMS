@@ -1,0 +1,33 @@
+{% extends 'auction/base.html' %}
+{% block content %}
+     {% for bid_item in bid_items %}
+         <br>
+        <article class="card-style" {% if bid_item.is_sold == 0 %} style="background-color: #b3ffb3"  {% else %} style="background-color: lightcoral" {% endif %} >
+            <div class="media content-section" {% if bid_item.is_sold == 0 %} style="background-color: #b3ffb3"  {% else %} style="background-color: lightcoral" {% endif %}>
+                <div class="media-body">
+                    <div class="article-metadata">
+                        <p class="mr-2">ITEM CODE => {{ bid_item.item_code }}</p>
+                        <h4>Name of item => {{ bid_item.item_name }}</h4>
+                    </div>
+                    <h6>{{ bid_item.item_description }}</h6>
+                </div>
+            </div>
+            <div class="card-status" >
+                <h6> BASE PRICE => {{ bid_item.base_price }}</h6>
+                {% if bid_item.is_sold == 0 %}
+                    <h4>UNSOLD</h4>
+                    <br>
+                    <h6>Last bid was of Rs. {{ bid_item.last_bid }}</h6>
+                    <br>
+                    {% if user.is_superuser == False %}
+                    <a href={% url 'item-bids-list' bid_item.id %}> PLACE A BID NOW</a>
+                     {% else %}
+                    <a href={% url 'stop-bidding' bid_item.item_code %}>VIEW BIDDING</a>
+                     {% endif %}
+                {% else %}
+                    <h6>SOLD at Rs. {{ bid_item.last_bid }}</h6>
+                {% endif %}
+            </div>
+        </article>
+    {% endfor %}
+{% endblock%}

@@ -1,0 +1,16 @@
+.vscode
+*.pyc
+*~
+/venv
+__pycache__
+backend-media/
+backend-static/
+backend-static-deploy/
+db.sqlite3
+*/migrations
+*/migrations/*
+keyconfig.py
+credentials.json
+mail_errors.txt
+*.log
+*.mp4

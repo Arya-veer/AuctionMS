@@ -1,0 +1,24 @@
+{% extends 'auction/base.html' %}
+{% block content %}
+     <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+            <input class="form-control" type="text" maxlength="20" placeholder="FIRST NAME" name="first_name">
+            <br>
+            <input type="text" class="form-control" maxlength="20" placeholder="LAST NAME" name="last_name">
+            <br>
+            <input type="email" maxlength="50" class="form-control" placeholder="EMAIL" name="email">
+            <br>
+            <input type="password" maxlength="16"  class="form-control" placeholder="PASSWORD" name="password1">
+            <br>
+            <input type="password" maxlength="16" class="form-control" placeholder="CONFIRM PASSWORD" name="password2">
+            <br>
+            <input type = "number" class="form-control" maxlength="10" placeholder="PHONE NUMBER" name="phone_number">
+            <br>
+            <input type = "number" class="form-control" maxlength="3" placeholder="AGE" name="age">
+            <br>
+            <input class="btn btn-primary" type="submit" value="REGISTER">
+            <br>
+        </div>
+    </form>
+{% endblock%}
